@@ -45,10 +45,14 @@
                                  021-559-7740 <br>
             <h6>Email: </h6> admin@sneakerstash.co.za <br>
             <h6>Tel: </h6> 065 544 7075 <b>(Online order queries)</b>- Reece <br>
-
         </p>
-
     </div>
+    <hr style="height:2px;border-width:0;color:gray;background-color:gray">
+    <div class="directions">
+        <h3>Visit us Instore</h3>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3310.8391787123473!2d18.413798315616596!3d-33.91953842912615!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1dcc67662b7f7dab%3A0xeaa6b193be496994!2s101%20Shortmarket%20St%2C%20Schotsche%20Kloof%2C%20Cape%20Town%2C%208001!5e0!3m2!1sen!2sza!4v1590527226543!5m2!1sen!2sza" width="600" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+    </div>
+
 </div>
 
 <br>
@@ -65,7 +69,6 @@
             <a href=""></a>
             <a href=""></a>
         </p>
-
       </div>
     </div>
   
