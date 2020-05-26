@@ -1,3 +1,6 @@
+body {
+   background-color: #f2f2f2;
+}
 /*index styling*/
 img#shoppingCartMenu {
    max-width: 24px;
@@ -83,4 +86,103 @@ img#shoppingCartMenu {
 }
 .about-info{
    margin-left: 20px;
+}
+/*contact styling*/
+#map{
+display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+   
+}
+.direction-info,.contact-info{
+   text-align: center;
+   
+}
+h3{
+   color: #00bc22;
+   font-family: 'Oswald', sans-serif;
+   text-align: center;
+}
+h2,h4{
+   color: black;
+   font-family: 'Oswald', sans-serif;
+   text-align: center;
+}
+h6{
+   color: #00bc22;
+}
+/*contact form styling*/
+#frmContact {
+	border-top: #a2d0c8 2px solid;
+    background: #b1e2da;
+	padding: 10px;
+}
+
+#frmContact div {
+	margin-bottom: 20px;
+}
+
+#frmContact div label {
+	margin: 5px 0px 0px 5px;    
+	color: #49615d;
+}
+
+.demoInputBox {
+	padding: 10px;
+	border: #a5d2ca 1px solid;
+	border-radius: 4px;
+	background-color: #FFF;
+	width: 100%;
+    margin-top:5px;
+}
+
+.error {
+	background-color: #FF6600;
+    padding: 8px 10px;
+    color: #FFFFFF;
+    border-radius: 4px;
+    font-size: 0.9em;
+}
+
+.success {
+	background-color: #c3c791;
+	padding: 8px 10px;
+	color: #FFFFFF;
+	border-radius: 4px;
+    font-size: 0.9em;
+}
+
+.info {
+	font-size: .8em;
+	color: #FF6600;
+	letter-spacing: 2px;
+	padding-left: 5px;
+}
+
+.btnAction {
+	background-color: #82a9a2;
+    padding: 10px 40px;
+    color: #FFF;
+    border: #739690 1px solid;
+	border-radius: 4px;
+}
+
+.btnAction:focus {
+	outline:none;
+}
+.column-right
+{
+    margin-right: 6px;
+}
+.contact-row
+{
+    display: inline-block;
+    width: 32%;
+}
+@media all and (max-width: 550px) {
+    .contact-row {
+        display: block;
+        width: 100%;
+    }
 }
