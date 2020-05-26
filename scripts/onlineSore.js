@@ -39,7 +39,7 @@ const updateCartAjax = ()=> {
         };
 
         //send the request to send-ajax-data.php
-        xhr.open("GET", "http:"+allItems, true);
+        xhr.open("GET", "http://test/Projects/shoppingApp/incl/cart.php?q="+allItems, true);
         xhr.send();
     console.log(allItems);
 };
