@@ -38,7 +38,17 @@
   </div>
 
 <div class="container1">
+    <div class="contact-info">
+        <h3>Contact Us</h3><br>
+        <p>
+            <h6>Location: </h6> Sneaker Stash Store, 101 Shortmarket Street, Cape Town, South Africa, 8000 <br>
+                                 021-559-7740 <br>
+            <h6>Email: </h6> admin@sneakerstash.co.za <br>
+            <h6>Tel: </h6> 065 544 7075 <b>(Online order queries)</b>- Reece <br>
 
+        </p>
+
+    </div>
 </div>
 
 <br>
