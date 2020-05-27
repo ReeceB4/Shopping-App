@@ -44,6 +44,57 @@ img#shoppingCartMenu {
    background-color: rgba(0,0,0.5);
    z-index: 2;
 }
+#editCart{
+   position: fixed;
+   display: none;
+   z-index: 3;
+   width:70%;
+   height: 100%;
+   top: 20%;
+   left: 0;
+   right: 0;
+   bottom: 0;
+   margin: auto;
+   background-color: white;
+   border-radius: 6px;
+   box-shadow: 5px 5px 5px;
+   padding: 6%;
+}
+#closeButton{
+   background-color: white;
+   margin-top: 70px;
+   width: 100%;
+}
+#orangeBox{
+   position: relative;
+   top: 10%;
+   left: 60px;
+   right: 0;
+   bottom: 0;
+   z-index: 4;
+   background: #f90;
+   color: #fff;
+   font-family: 'Oswald', sans-serif;
+   font-size: 2em;
+   font-weight: bold;
+   text-align: center;
+   width: 40px;
+   height: 40px;
+   border-radius: 5px;
+}
+#deleteItemID{
+   display: inline-block;
+}
+#deleteItem button{
+   display: inline-block;
+}
+.editCartDelItem{
+   display: none;
+   list-style-type: none;
+}
+span.cartItems{
+   color: yellowgreen;
+}
 /*about styling*/
 .logo-nav{
    width: 75px;
@@ -185,4 +236,10 @@ h6{
         display: block;
         width: 100%;
     }
+}
+@media (max-width: 425px) {
+   .container1 {
+     margin-left:0;
+     margin-right: 0;
+   }
 }
