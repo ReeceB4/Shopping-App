@@ -8,31 +8,37 @@ require_once "incl/connect.php";
 require_once  "vendor/autoload.php";
           
         
+function sendComment($userEmail, $userName, $subject, $content){
 
-$mail = new PHPMailer();
-$mail->IsSMTP();
-$mail->SMTPDebug = 0;
-$mail->SMTPAuth = TRUE;
-$mail->SMTPSecure = "tls";
-$mail->Port     = 587;  
-$mail->Username = "1e820a8081abda";
-$mail->Password = "ec82c7c05ba2b2";
-$mail->Host     = "smtp.mailtrap.io";
-$mail->Mailer   = "smtp";
-$mail->SetFrom($_POST["userEmail"], $_POST["userName"]);
-$mail->AddReplyTo($_POST["userEmail"], $_POST["userName"]);
-$mail->AddAddress("admin@sneakerstash.co.za");	
-$mail->Subject = $_POST["subject"];
-$mail->WordWrap   = 80;
-$mail->MsgHTML($_POST["content"]);
 
-$mail->IsHTML(true);
+  $mail = new PHPMailer();
 
-if(!$mail->Send()) {
-  echo "<p class='error'>Problem in Sending Mail.</p>";
-} else {
-  echo "<p class='success'>Contact Mail Sent.</p>";
-}	
+  $mail->IsSMTP();
+  $mail->SMTPDebug = 0;
+  $mail->SMTPAuth = TRUE;
+  $mail->SMTPSecure = "tls";
+  $mail->Port     = 587;  
+  $mail->Username = "1e820a8081abda";
+  $mail->Password = "ec82c7c05ba2b2";
+  $mail->Host     = "smtp.mailtrap.io";
+  $mail->Mailer   = "smtp";
+
+  $mail->SetFrom($userEmail, $userName);
+  $mail->AddReplyTo($userEmail, $userName);
+  $mail->AddAddress("admin@sneakerstash.co.za");	
+  $mail->Subject = $subject;
+  $mail->WordWrap   = 80;
+  $mail->MsgHTML($content);
+
+  $mail->IsHTML(true);
+  if(!$mail->Send()) {
+    echo $mail->errorMessage();
+  } else {
+    echo "<p class='success'>Contact Mail Sent.</p>";
+  }	
+}
+
+ sendComment($_POST["userEmail"], $_POST["userName"],$_POST["subject"],$_POST["content"])
 ?>
  
 <!DOCTYPE html>
