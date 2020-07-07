@@ -60,3 +60,8 @@ $(document).ready(function() {
         isElemVisable('.fadeIn', 'isVisable');
     });//end scroll functionallity
 })// end document.ready
+
+
+
+
+

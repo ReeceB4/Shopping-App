@@ -1,44 +1,11 @@
 <?php
 
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
 
 // Include config file
 require_once "incl/connect.php";
 require_once  "vendor/autoload.php";
           
-        
-function sendComment($userEmail, $userName, $subject, $content){
 
-
-  $mail = new PHPMailer();
-
-  $mail->IsSMTP();
-  $mail->SMTPDebug = 0;
-  $mail->SMTPAuth = TRUE;
-  $mail->SMTPSecure = "tls";
-  $mail->Port     = 587;  
-  $mail->Username = "1e820a8081abda";
-  $mail->Password = "ec82c7c05ba2b2";
-  $mail->Host     = "smtp.mailtrap.io";
-  $mail->Mailer   = "smtp";
-
-  $mail->SetFrom($userEmail, $userName);
-  $mail->AddReplyTo($userEmail, $userName);
-  $mail->AddAddress("admin@sneakerstash.co.za");	
-  $mail->Subject = $subject;
-  $mail->WordWrap   = 80;
-  $mail->MsgHTML($content);
-
-  $mail->IsHTML(true);
-  if(!$mail->Send()) {
-    echo $mail->errorMessage();
-  } else {
-    echo "<p class='success'>Contact Mail Sent.</p>";
-  }	
-}
-
- sendComment($_POST["userEmail"], $_POST["userName"],$_POST["subject"],$_POST["content"])
 ?>
  
 <!DOCTYPE html>
@@ -111,6 +78,38 @@ function sendComment($userEmail, $userName, $subject, $content){
 
         <h4><i>All queries can be submitted using the form below.</i></h4>
 
+        <?php
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+$mail = new PHPMailer(true);
+$mail->IsSMTP();
+$mail->SMTPDebug = 0;
+$mail->SMTPAuth = TRUE;
+$mail->SMTPSecure = "tls";
+$mail->Port     = 587;  
+$mail->Username = "1e820a8081abda";
+$mail->Password = "ec82c7c05ba2b2";
+$mail->Host     = "smtp.mailtrap.io";
+$mail->Mailer   = "smtp";
+$mail->SetFrom($_POST["userEmail"], $_POST["userName"]);
+$mail->AddReplyTo($_POST["userEmail"], $_POST["userName"]);
+$mail->AddAddress("admin@sneakerstash.co.za");	
+$mail->Subject = $_POST["subject"];
+$mail->WordWrap   = 80;
+$mail->MsgHTML($_POST["content"]);
+
+$mail->IsHTML(true);
+
+if(!$mail->Send()) {
+  var_dump($mail->send);
+  echo "<p class='error'>Problem in Sending Mail.</p>";
+} else {
+	echo "<p class='success'>Contact Mail Sent.</p>";
+}	
+
+?>
+
     <form id="frmContact" action="" method="post">
         <div id="mail-status"></div>
             <div class="contact-row column-right">
@@ -160,6 +159,8 @@ function sendComment($userEmail, $userName, $subject, $content){
         </p>
       </div>
     </div>
+
+
   
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
