@@ -1,8 +1,8 @@
-<?php/
+<?php
 // Initialize the session
 session_start();
-include "incl/connect.php";
-$conn = db_connection();
+require_once 'incl/connect.php';
+
 // Check if the user is logged in, if not then redirect him to login page
 /*if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     header("location: login.php");
@@ -24,7 +24,7 @@ $conn = db_connection();
 <div id="shoppingApp">
 <!--Nav Bar --><!--#00bc22-->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
-  <a class="navbar-brand" href="#">
+  <a class="navbar-brand" href="index.php">
     <img src="images/logo.png" alt="sneaker stash logo" class="logo-nav">
   </a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -33,13 +33,13 @@ $conn = db_connection();
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
       <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">About</a>
+        <a class="nav-link" href="about.php">About</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Contact</a>
+        <a class="nav-link" href="contact.php">Contact</a>
       </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="dropdown01" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -131,16 +131,14 @@ $conn = db_connection();
               </div>            
         </div>
         <div class="text-center mt-5 pt-5">
-            <h1>Sneaker Stash Online Store</h1>
-            <div class="page-header">
-              <h1><!--Hi, <b><?php echo htmlspecialchars($_SESSION["username"]); ?></b>.--> Welcome to our online sneaker store.</h1><br>
-            
-              <p>Please click on a sneaker to find out more about it. </p>
+            <h1>Welcome to Sneaker Stash Online Store</h1>
+            <div class="page-header">            
+              <h5>Please browse from our selection of footwear sneakers. </h5>
             </div>
         </div>
 
 <!--slidshow-->
-<!--div class="bd-example">
+<div class="bd-example">
   <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
     <ol class="carousel-indicators">
       <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
@@ -149,21 +147,21 @@ $conn = db_connection();
     </ol>
     <div class="carousel-inner">
       <div class="carousel-item active">
-        <img src="images/shoes/slidePic1.jpg" class="d-block w-100" alt="Jordan 13 Retro Grey Toe (2014)">
+        <img src="images/shoes/slidePic1.jpg" class="d-block w-50" alt="Jordan 13 Retro Grey Toe (2014)">
         <div class="carousel-caption d-none d-md-block">
-          <h5>Jordan 13 Retro Grey Toe (2014)</h5>
+          <h5 class="caption">Jordan 13 Retro Grey Toe (2014)</h5>
           <p>R 2,799</p>
         </div>
       </div>
       <div class="carousel-item">
-        <img src="images/shoes/slidePic2.jpg" class="d-block w-100" alt="Nike Blazer Mid Off-White All Hallow's Eve 2018 Men">
+        <img src="images/shoes/slidePic2.jpg" class="d-block w-50" alt="Nike Blazer Mid Off-White All Hallow's Eve 2018 Men">
         <div class="carousel-caption d-none d-md-block">
           <h5>Nike Blazer Mid Off-White All Hallow's Eve 2018 Men</h5>
           <p>R 11,999</p>
         </div>
       </div>
       <div class="carousel-item">
-        <img src="images/shoes/slidePic3.jpg" class="d-block w-100" alt="Air Presto Off-White Black (2018) 2018 Men">
+        <img src="images/shoes/slidePic3.jpg" class="d-block w-50" alt="Air Presto Off-White Black (2018) 2018 Men">
         <div class="carousel-caption d-none d-md-block">
           <h5>Air Presto Off-White Black (2018) 2018 Men</h5>
           <p>R 9,899</p>
@@ -179,28 +177,29 @@ $conn = db_connection();
       <span class="sr-only">Next</span>
     </a>
   </div>
-</div>-->
+</div>
 
 
       <?php
-      
+      $conn = db_connection();
+     
       $sql = "SELECT * FROM onlineshop_products";
       $result = $conn->query($sql);
       if($result->num_rows > 0){
         while($row = $result->fetch_assoc()) {
-          echo "\n\t\t\t<div class=\"products fadeIn\" id=\"".$row["product"] ."\">
-                  <h3> " . $row["product"] . "</h3>" .
-                  "<br><img src=\"" . $row["image"] . "\">" .
-                  "<br><h5>" . $row["short_desc"] . "</h5>" . 
-                  "\n\t\t\t\t<div class=\"purchase\">
-                      <label for\"" . $row["product"] . "quantity\">Quantity (Max 3 ):</label>
-                      <input type=\"number\" id=\"" . $row["product"] . "quantity\" name=\"". $row["product"] . "quantity\" value=\"1\" min=\"1\" max=\"3\">
-                      <button type=\"button\" name=\"addToCart\" @click=\"addToCart\" id=\"". $row["product"] ."\"> Add to Cart</button>\n
-                      <input hidden readonly value=\"" . $row["price"] . "\" id=\"". $row["product"] . "price" . "\">Price : R" . $row["price"] . "
-                  </div><!--close purchase class-->\n" .
-                "\t\t\t</div>";                      
+            echo "\n\t\t\t<div class=\"products fadeIn\" id=\"". $row["product"] ."\">
+                    <h3> " . $row["product"] . "</h3>" .
+                    "<br><img src=\"" . $row["image"] . "\">" .
+                    "<br><h5>" . $row["short_desc"] . "</h5>" . 
+                    "\n\t\t\t\t<div class=\"purchase\">
+                        <label for=\"" . $row["product"] . "quantity\">Quantity (Max 3):</label>
+                        <input type=\"number\" id=\"" . $row["product"] . "quantity\" name=\"". $row["product"] ."quantity\" value=\"1\" min=\"1\" max=\"3\">
+                        <button type=\"button\" name=\"addToCart\" @click=\"addToCart\" id=\"". $row["product"] ."\">Add to Cart</button>\n
+                        <input hidden readonly value=\"" . $row["price"] . "\" id=\"". $row["product"] . "price" . "\">Price : R" . $row["price"] . "
+                    </div><!--close purchase class-->\n" .
+                "\t\t\t</div>";
+            }
         }
-      }
 
       ?>
 
@@ -219,7 +218,7 @@ $conn = db_connection();
     <script src="scripts/vueScripts.js"></script>
 
       <!--republishing of cart-->
-    <?php /*
+    <?php 
          if(isset($_SESSION["username"])){
                 $loggedInUser = $_SESSION["username"];
                 echo $loggedInUser;
@@ -245,7 +244,7 @@ $conn = db_connection();
                 </script>';
             }else{
                 echo "user not logged in";
-            }*/
+            }
     ?>
 </body>
 </html>
