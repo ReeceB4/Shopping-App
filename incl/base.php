@@ -2,9 +2,9 @@
 
 //login creds
 
-define('DB_SERVER', 'localhost');
-define('DB_USERNAME', 'root');
-define('DB_PASSWORD', '');
-define('DB_NAME', 'todo_db');
+define('DB_SERVER', '167.71.74.228');
+define('DB_USERNAME', 'reece');
+define('DB_PASSWORD', 'Berne14raoul');
+define('DB_NAME', 'WDI2020_reece');
 
 ?>

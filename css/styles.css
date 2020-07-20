@@ -72,7 +72,7 @@ img#shoppingCartMenu {
    right: 0;
    bottom: 0;
    z-index: 4;
-   background: #f90;
+   background: #00bc22;
    color: #fff;
    font-family: 'Oswald', sans-serif;
    font-size: 2em;
@@ -243,10 +243,7 @@ h5,h6{
      margin-right: 0;
    }
 }
-.carousel-item.active{
-   margin-right: auto;
+.fadeIn img{
    margin-left: auto;
-}
-.caption{
-   color: #00bc22;
+   margin-right: auto;
 }

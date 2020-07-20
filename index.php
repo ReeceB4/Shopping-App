@@ -22,7 +22,7 @@ require_once 'incl/connect.php';
 <body>
 <script src="https://unpkg.com/vue"></script>
 <div id="shoppingApp">
-<!--Nav Bar --><!--#00bc22-->
+<!--Nav Bar -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
   <a class="navbar-brand" href="index.php">
     <img src="images/logo.png" alt="sneaker stash logo" class="logo-nav">
@@ -31,7 +31,7 @@ require_once 'incl/connect.php';
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav">
+    <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
         <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
       </li>
@@ -47,88 +47,57 @@ require_once 'incl/connect.php';
           <img src="images/cart.png" alt="shopping cart" id="shoppingCartMenu">
         </a>
         <div class="dropdown-menu" aria-labelledby="dropdown01">
-          <a class="dropdown-item" href="#" onclick="overlayon()" @click="duplicateObj(itemObj)">View</a>
-          <a class="dropdown-item" href="#">
-              <input type="hidden" name="cmd" value="_ext-enter">
-              <form action="https://www.paypal.com/us/cgi-bin/webscr" method="post">
-                <input type="hidden" name="cmd" value="_xclick">
-                <input type="hidden" name="business" value="sneakerstash@shoestash.com">
-                <input type="hidden" name="item_name" value="Sneakers from Sneaker Stash">
-                <input type="hidden" name="currency_code" value="USD">
-                <input type="hidden" name="amount" v-bind:value=ZARtoUSD>
-                  <button type="submit" name="submit" alt="Make payments with PayPal -it's fast, free and secure!">Checkout</button>
-
-              </form>
-          </a>          
-        </div>
-        
-        <span class="cartItems">{{"Item Count : " +totalItems}}</span>
-        <span class="cartItems">{{"--- R"+totalPrice}}</span>
-      </li>
-    </ul>
-  </div>
+                    <a class="dropdown-item" href="#" onclick="overlayOn()" @click="duplicateObj(itemsObj)">View</a>
+                    <a class="dropdown-item" href="#">
+                        <input type="hidden" name="cmd" value="_ext-enter">
+                        <form action="https://www.paypal.com/us/cgi-bin/webscr" method="post">
+                           <input type="hidden" name="cmd" value="_xclick">
+                           <input type="hidden" name="business" value="sneakerstash@gmail.com">
+                           <input type="hidden" name="item_name" value="Stuff from Nate's Store">
+                           <input type="hidden" name="currency_code" value="USD">
+                           <input type="hidden" name="amount" v-bind:value=ZARtoUSD>
+                            <button type="submit" name="submit" alt="Make payments with PayPal">Checkout</button>
+                        </form>
+                    </a>
+                </div>
+                <span class="cartItems">{{"Item Count : " +totalItems}}</span>
+                <span class="cartItems">{{"--- R"+totalPrice}}</span> 
+            </li>
+        </ul>
+    </div>
 </nav>
-     
-      <!--<li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Shopping Cart 
-          <img src="images/cart.png" alt="shopping cart" id="shoppingCartMenu">
-        </a>
-        <div class="dropdown-menu" aria-labelledby="dropdown01">
-          <a class="dropdown-item" href="#" onclick="overlayon()" @click="duplicateObj(itemObj)">View</a>
-          <a class="dropdown-item" href="#">
-              <input type="hidden" name="cmd" value="_ext-enter">
-              <form action="https://www.paypal.com/us/cgi-bin/webscr" method="post">
-                <input type="hidden" name="cmd" value="_xclick">
-                <input type="hidden" name="business" value="sneakerstash@shoestash.com">
-                <input type="hidden" name="item_name" value="Sneakers from Sneaker Stash">
-                <input type="hidden" name="currency_code" value="USD">
-                <input type="hidden" name="amount" v-bind:value=ZARtoUSD>
-                  <button type="submit" name="submit" alt="Make payments with PayPal -it's fast, free and secure!">Checkout</button>
-
-              </form>
-          </a>          
-        </div>
-        
-        <span class="cartItems">{{"Item Count : " +totalItems}}</span>
-        <span class="cartItems">{{"--- R"+totalPrice}}</span>
-      </li>-->
-  
-  
 
     <main role="main" class="container">
         <div id="overlay">
-              <div id="closeButton">
-                <button onclick="overlayOff()" @click="resetChanges(quantities, itemsObj)">
-                  <div id="orangeBox">
+            <div id="closeButton">
+              <button onclick="overlayOff()" @click="resetChanges(quantities, itemsObj)">
+                <div id="orangeBox">
                     <span id="x">X</span>
-                  </div>
-                </button>
-              </div>
-              <!--cart tab with items-->
-              <div id="editCart">
+                </div>
+              </button>
+            </div><!--close button-->
+            <div id="editCart">
                 <ul>
-                  <li v-for="(item, key, index) in itemsObj" v-if="item.quantity > 0">
-                    {{ key }} - <input type="number" v-model=item.quantity min="1" max="3">
-                    <div id="deleteItemID">
-                      <button name="deleteItem" @click="deleteItem()" v-bind:value= key>X</button>
-                      <button name="apply" id= key @click="upDateEditCart(itemsObj)">&#10004;</button>
-                    </div>
-                  </li>
+                    <li v-for="(item, key, index) in itemsObj" v-if="item.quantity > 0">
+                        {{ key }} - <input type="number" v-model=item.quantity min="1" max="5"> 
+                        <div id="deleteItemID">
+                            <button name="deleteItem" @click="deleteItem()" v-bind:value= key>X</button>
+                            <button name="apply" id= key @click="upDateEditCart(itemsObj)">&#10004;</button>
+                        </div>
+                    </li>   
                 </ul>
-                <!--paypal -->
                 <input type="hidden" name="cmd" value="_ext-enter">
                 <form action="https://www.paypal.com/us/cgi-bin/webscr" method="post">
-                  <input type="hidden" name="cmd" value="_xclick">
-                  <input type="hidden" name="business" value="sneakerstash@shoestash.com">
-                  <input type="hidden" name="item_name" value="Sneakers from Sneaker Stash">
-                  <input type="hidden" name="currency_code" value="USD">
-                  <input type="hidden" name="amount" v-bind:value=ZARtoUSD>
-                  <input type="image" src="images/checkout.png" name="submit" alt="Make payments with PayPal - it's fast, free and secure!">
-                  
+                   <input type="hidden" name="cmd" value="_xclick">
+                   <input type="hidden" name="business" value="nate@natestore.com">
+                   <input type="hidden" name="item_name" value="Stuff from Nate's Store">
+                   <input type="hidden" name="currency_code" value="USD">
+                   <input type="hidden" name="amount" v-bind:value=ZARtoUSD>
+                   <input type="image" src="images/checkout.png" name="submit" alt="Make payments with PayPal" id="check">
+                    
                 </form>
-                <button onclick="overlayOff()" @click="continueShopping" >Continue Shopping</button>
-              </div>            
+                <button onclick="overlayOff()" @click="continueShopping">Continue Shopping</button>
+            </div>
         </div>
         <div class="text-center mt-5 pt-5">
             <h1>Welcome to Sneaker Stash Online Store</h1>
@@ -189,7 +158,7 @@ require_once 'incl/connect.php';
         while($row = $result->fetch_assoc()) {
             echo "\n\t\t\t<div class=\"products fadeIn\" id=\"". $row["product"] ."\">
                     <h3> " . $row["product"] . "</h3>" .
-                    "<br><img src=\"" . $row["image"] . "\">" .
+                    "<br><img src=\"" . $row["image"] . " \">" .
                     "<br><h5>" . $row["short_desc"] . "</h5>" . 
                     "\n\t\t\t\t<div class=\"purchase\">
                         <label for=\"" . $row["product"] . "quantity\">Quantity (Max 3):</label>
