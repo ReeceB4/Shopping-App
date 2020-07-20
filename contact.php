@@ -3,8 +3,9 @@
 
 // Include config file
 require_once "incl/connect.php";
-require_once  "vendor/autoload.php";
-          
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;     
 
 ?>
  
@@ -30,22 +31,17 @@ require_once  "vendor/autoload.php";
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
       <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="index.php">Home </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">About</a>
+        <a class="nav-link" href="about.php">About</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Contact</a>
+        <a class="nav-link" href="contact.php">Contact</a><span class="sr-only">(current)</span>
       </li>
     </ul>
   </div>
 </nav>
-
-<!--cart navbar-->
-<div id="cart-nav">
-      <p>Cart</p>
-  </div>
 
 <div class="container1">
     <div class="contact-info">
@@ -78,37 +74,7 @@ require_once  "vendor/autoload.php";
 
         <h4><i>All queries can be submitted using the form below.</i></h4>
 
-        <?php
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
 
-$mail = new PHPMailer(true);
-$mail->IsSMTP();
-$mail->SMTPDebug = 0;
-$mail->SMTPAuth = TRUE;
-$mail->SMTPSecure = "tls";
-$mail->Port     = 587;  
-$mail->Username = "1e820a8081abda";
-$mail->Password = "ec82c7c05ba2b2";
-$mail->Host     = "smtp.mailtrap.io";
-$mail->Mailer   = "smtp";
-$mail->SetFrom($_POST["userEmail"], $_POST["userName"]);
-$mail->AddReplyTo($_POST["userEmail"], $_POST["userName"]);
-$mail->AddAddress("admin@sneakerstash.co.za");	
-$mail->Subject = $_POST["subject"];
-$mail->WordWrap   = 80;
-$mail->MsgHTML($_POST["content"]);
-
-$mail->IsHTML(true);
-
-if(!$mail->Send()) {
-  var_dump($mail->send);
-  echo "<p class='error'>Problem in Sending Mail.</p>";
-} else {
-	echo "<p class='success'>Contact Mail Sent.</p>";
-}	
-
-?>
 
     <form id="frmContact" action="" method="post">
         <div id="mail-status"></div>
@@ -144,6 +110,35 @@ if(!$mail->Send()) {
 </div>
         
 <br>
+<?php
+
+$mail = new PHPMailer(true);
+$mail->IsSMTP();
+$mail->SMTPDebug = 0;
+$mail->SMTPAuth = TRUE;
+$mail->SMTPSecure = "tls";
+$mail->Port     = 587;  
+$mail->Username = "1e820a8081abda";
+$mail->Password = "ec82c7c05ba2b2";
+$mail->Host     = "smtp.mailtrap.io";
+$mail->Mailer   = "smtp";
+$mail->SetFrom($_POST["userEmail"], $_POST["userName"]);
+$mail->AddReplyTo($_POST["userEmail"], $_POST["userName"]);
+$mail->AddAddress("admin@sneakerstash.co.za");	
+$mail->Subject = $_POST["subject"];
+$mail->WordWrap   = 80;
+$mail->MsgHTML($_POST["content"]);
+
+$mail->IsHTML(true);
+
+if(!$mail->Send()) {
+  var_dump($mail->send);
+  echo "<p class='error'>Problem in Sending Mail.</p>";
+} else {
+	echo "<p class='success'>Contact Mail Sent.</p>";
+}	
+
+?>
 
 <div class="foot">
       <div class="foot-info">

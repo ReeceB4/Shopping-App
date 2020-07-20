@@ -41,6 +41,7 @@ require_once 'incl/connect.php';
       <li class="nav-item">
         <a class="nav-link" href="contact.php">Contact</a>
       </li>
+      <!--cart-->
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="dropdown01" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Shopping Cart 
@@ -53,7 +54,7 @@ require_once 'incl/connect.php';
                         <form action="https://www.paypal.com/us/cgi-bin/webscr" method="post">
                            <input type="hidden" name="cmd" value="_xclick">
                            <input type="hidden" name="business" value="sneakerstash@gmail.com">
-                           <input type="hidden" name="item_name" value="Stuff from Nate's Store">
+                           <input type="hidden" name="item_name" value="Shoes from Sneaker Stash">
                            <input type="hidden" name="currency_code" value="USD">
                            <input type="hidden" name="amount" v-bind:value=ZARtoUSD>
                             <button type="submit" name="submit" alt="Make payments with PayPal">Checkout</button>
@@ -77,7 +78,7 @@ require_once 'incl/connect.php';
               </button>
             </div><!--close button-->
             <div id="editCart">
-                <ul>
+                <ul><!--cart tab with products-->
                     <li v-for="(item, key, index) in itemsObj" v-if="item.quantity > 0">
                         {{ key }} - <input type="number" v-model=item.quantity min="1" max="5"> 
                         <div id="deleteItemID">
@@ -89,8 +90,8 @@ require_once 'incl/connect.php';
                 <input type="hidden" name="cmd" value="_ext-enter">
                 <form action="https://www.paypal.com/us/cgi-bin/webscr" method="post">
                    <input type="hidden" name="cmd" value="_xclick">
-                   <input type="hidden" name="business" value="nate@natestore.com">
-                   <input type="hidden" name="item_name" value="Stuff from Nate's Store">
+                   <input type="hidden" name="business" value="sneakerstash@gmail.com">
+                   <input type="hidden" name="item_name" value="Shoes from Sneaker Stash">
                    <input type="hidden" name="currency_code" value="USD">
                    <input type="hidden" name="amount" v-bind:value=ZARtoUSD>
                    <input type="image" src="images/checkout.png" name="submit" alt="Make payments with PayPal" id="check">
@@ -105,8 +106,8 @@ require_once 'incl/connect.php';
               <h5>Please browse from our selection of footwear sneakers. </h5>
             </div>
         </div>
-
-<!--slidshow-->
+        
+<!--slidshow of shoes-->
 <div class="bd-example">
   <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
     <ol class="carousel-indicators">
@@ -147,8 +148,7 @@ require_once 'incl/connect.php';
     </a>
   </div>
 </div>
-
-
+        <!--the display product-->
       <?php
       $conn = db_connection();
      
@@ -159,7 +159,7 @@ require_once 'incl/connect.php';
             echo "\n\t\t\t<div class=\"products fadeIn\" id=\"". $row["product"] ."\">
                     <h3> " . $row["product"] . "</h3>" .
                     "<br><img src=\"" . $row["image"] . " \">" .
-                    "<br><h5>" . $row["short_desc"] . "</h5>" . 
+                    "<br><h5><b><i>" . $row["short_desc"] . "</i></b></h5>" . 
                     "\n\t\t\t\t<div class=\"purchase\">
                         <label for=\"" . $row["product"] . "quantity\">Quantity (Max 3):</label>
                         <input type=\"number\" id=\"" . $row["product"] . "quantity\" name=\"". $row["product"] ."quantity\" value=\"1\" min=\"1\" max=\"3\">
@@ -169,10 +169,7 @@ require_once 'incl/connect.php';
                 "\t\t\t</div>";
             }
         }
-
-      ?>
-
-      
+      ?>      
           </div>
           <br>
       </main>
@@ -187,7 +184,7 @@ require_once 'incl/connect.php';
     <script src="scripts/vueScripts.js"></script>
 
       <!--republishing of cart-->
-    <?php 
+      <?php 
          if(isset($_SESSION["username"])){
                 $loggedInUser = $_SESSION["username"];
                 echo $loggedInUser;
